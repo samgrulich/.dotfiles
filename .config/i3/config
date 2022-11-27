@@ -14,9 +14,8 @@ set $mod Mod1
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # font pango:monospace 12
-font pango:Roboto Mono Regular 12
-# font pango:Iosevka Custom Nerd Font Complete 12
-# font pango:Consolas 12
+#font pango:B612 Mono 12
+font pango:Consolas 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -53,7 +52,6 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec kitty
-bindsym $mod+t exec kitty tmux
 
 # kill focused window
 bindsym $mod+q kill
@@ -98,9 +96,6 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-
-# suspend monitor
-# bindsym Ctrl+Home exec --no-startup-id systemctl suspend
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -205,6 +200,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -q set 5%+
 
 # wallpaper
 exec_always feh --bg-fill $HOME/imgs/wallpapers/colorful-beautiful-flowers-background-blossom-floral-bouquet-decoration-garden-flowers-plant-pattern-wallpapers-greeting-cards-postcards-design-wedding-invites.jpg
+# exec_always feh --bg-fill $HOME/db/imgs/wallpaper.jpg
 
 # polybar 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
