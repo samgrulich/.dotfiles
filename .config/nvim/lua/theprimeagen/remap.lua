@@ -11,7 +11,7 @@ nnoremap("<leader>j", "<C-w>j<CR>")
 nnoremap("<leader>k", "<C-w>k<CR>")
 nnoremap("<leader>l", "<C-w>l<CR>")
 
-nnoremap("<leader>v", "<C-w>v<cmd>Ex<CR>")
-nnoremap("<leader>n", "<C-w>n<cmd>Ex<CR>")
+nnoremap("<leader>n", "<C-w>v<cmd>Ex<CR>")
+nnoremap("<leader>v", "<C-w>n<cmd>Ex<CR>")
 
 
