@@ -19,8 +19,13 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp'
 
   -- For vsnip users.
+<<<<<<< HEAD
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
+=======
+  -- Plug 'hrsh7th/cmp-vsnip'
+  -- Plug 'hrsh7th/vim-vsnip'
+>>>>>>> c427113 (lsp, autocompletion setup + tweaks)
 
   -- colorscheme
   use 'folke/tokyonight.nvim'
