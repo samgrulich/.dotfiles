@@ -154,6 +154,9 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+assign [class="kitty"] $ws1
+assign [class="firefox"] $ws2
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -212,3 +215,6 @@ client.background       #000000
 gaps outer 2
 gaps inner 5
 
+# autostart
+exec --no-startup-id kitty
+exec --no-startup-id firefox
