@@ -8,6 +8,8 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   -- use 'neoclide/coc.nvim' --{'branch': 'release'}
   use 'neovim/nvim-lspconfig'
+  -- Commenting
+  use 'numToStr/Comment.nvim'
 
   -- Nvim-CMP
   use 'hrsh7th/cmp-nvim-lsp'
@@ -17,8 +19,8 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp'
 
   -- For vsnip users.
-  -- Plug 'hrsh7th/cmp-vsnip'
-  -- Plug 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
 
   -- colorscheme
   use 'folke/tokyonight.nvim'
