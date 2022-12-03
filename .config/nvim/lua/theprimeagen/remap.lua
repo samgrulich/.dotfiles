@@ -14,4 +14,11 @@ nnoremap("<leader>l", "<C-w>l<CR>")
 nnoremap("<leader>n", "<C-w>v<cmd>Ex<CR>")
 nnoremap("<leader>v", "<C-w>n<cmd>Ex<CR>")
 
+-- horizontal movement 
+nnoremap("<C-d>", "<C-d>zz")
+nnoremap("<C-u>", "<C-u>zz")
+
+nnoremap("n", "nzzzv")
+nnoremap("N", "Nzzzv")
+-- nnoremap("<leader>py", "<cmd>!python")
 
