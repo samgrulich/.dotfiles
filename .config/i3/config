@@ -16,7 +16,7 @@ set $mod Mod1
 # font pango:monospace 12
 # font pango:B612 Mono Regular 12
 # font pango:Luxi Mono Regular 10
-font pango:Roboto Mono Regular 12
+font pango:Roboto Mono Regular 0
 # font pango:Iosevka Custom Nerd Font Complete 12
 # font pango:Consolas 12
 
@@ -211,10 +211,14 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #000000
 
+# border settings
+default_border pixel 4
+
 # gaps
 gaps outer 2
 gaps inner 5
 
 # autostart
+exec --no-startup-id picom -b
 exec --no-startup-id kitty
 exec --no-startup-id firefox
