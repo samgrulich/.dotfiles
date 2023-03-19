@@ -22,3 +22,8 @@ nnoremap("n", "nzzzv")
 nnoremap("N", "Nzzzv")
 -- nnoremap("<leader>py", "<cmd>!python")
 
+-- fullscreen
+nnoremap("<leader>fn", "<C-w>|<CR>")
+nnoremap("<leader>vn", "<C-w>_<CR>")
+nnoremap("<leader>=",  "<C-w>=<CR>")
+

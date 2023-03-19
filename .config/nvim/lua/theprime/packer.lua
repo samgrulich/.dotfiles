@@ -22,6 +22,23 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', {run = ":TSUpdate"})
   use('windwp/nvim-ts-autotag')
 
+  -- Error table
+  use({
+    "folke/trouble.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+        require("trouble").setup {
+            -- your configuration comes here
+        }
+      end
+  })
+
+  -- Debugging (dap)
+  -- use 'simrat39/rust-tools.nvim'
+  use 'mfussenegger/nvim-dap'
+  -- use 'rcarriga/nvim-dap-ui'
+  -- use 'theHamsta/nvim-dap-virtual-text'
+
   -- lsp 
   use {
     'VonHeikemen/lsp-zero.nvim',
@@ -38,6 +55,7 @@ return require('packer').startup(function(use)
         {'saadparwaiz1/cmp_luasnip'},
         {'hrsh7th/cmp-nvim-lsp'},
         {'hrsh7th/cmp-nvim-lua'},
+
 
         -- Snippets
         {'L3MON4D3/LuaSnip'},
