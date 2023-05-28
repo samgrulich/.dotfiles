@@ -10,6 +10,12 @@ return require('packer').startup(function(use)
   -- Commenting
   use 'numToStr/Comment.nvim'
 
+  -- Navigation
+  use 'christoomey/vim-tmux-navigator'
+
+  -- Status Line
+  use 'nvim-lualine/lualine.nvim'
+
   -- Fuzz finders
   use 'nvim-lua/plenary.nvim'
   use 'theprimeagen/harpoon'
@@ -39,6 +45,10 @@ return require('packer').startup(function(use)
   -- use 'rcarriga/nvim-dap-ui'
   -- use 'theHamsta/nvim-dap-virtual-text'
 
+  -- Github copilot
+  use 'github/copilot.vim'
+  -- use 'zbirenbaum/copilot.lua'
+
   -- lsp 
   use {
     'VonHeikemen/lsp-zero.nvim',
@@ -56,11 +66,13 @@ return require('packer').startup(function(use)
         {'hrsh7th/cmp-nvim-lsp'},
         {'hrsh7th/cmp-nvim-lua'},
 
-
         -- Snippets
         {'L3MON4D3/LuaSnip'},
         -- Snippet Collection (Optional)
         {'rafamadriz/friendly-snippets'},
+
+        -- nice ui Snippet
+        -- lspsaga
     }
   }
 

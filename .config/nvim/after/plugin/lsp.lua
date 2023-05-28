@@ -1,6 +1,9 @@
 -- Learn the keybindings, see :help lsp-zero-keybindings
 -- Learn to configure LSP servers, see :help lsp-zero-api-showcase
-local lsp = require('lsp-zero')
+local lsp_status, lsp = pcall(require, 'lsp-zero')
+if not lsp_status then
+    return 
+end
 
 lsp.preset('recommended')
 
@@ -21,7 +24,10 @@ lsp.configure('sumneko_lua', {
     }
 })
 
-local cmp = require('cmp')
+local cmp_status, cmp = pcall(require, 'cmp')
+if not cmp_status then 
+    return 
+end
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
