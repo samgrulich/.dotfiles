@@ -1,0 +1,15 @@
+base 
+linux 
+linux-firmware
+feh
+? efibootmgr
+git 
+github-cli
+? grub
+? i3 
+? i3wm
+? i3-gaps
+--
+polybar
+zsh
+
