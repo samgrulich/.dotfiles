@@ -9,6 +9,12 @@ end
 vim.filetype.add {
     extension = {
         wgsl = "wgsl",
+        frag = "glsl",
+        vert = "glsl",
+        geom = "glsl",
+        tesc = "glsl",
+        tese = "glsl",
+        comp = "glsl",
     }
 }
 
