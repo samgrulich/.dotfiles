@@ -30,6 +30,13 @@ return require('packer').startup(function(use)
   use {
       'nvim-treesitter/nvim-treesitter', 
   }
+  use {
+      "windwp/nvim-autopairs",
+      event = "InsertEnter",
+      config = function()
+        require("nvim-autopairs").setup {}
+      end
+  }
   use('windwp/nvim-ts-autotag')
 
   -- Error table
@@ -72,7 +79,7 @@ return require('packer').startup(function(use)
         -- Snippets
         {'L3MON4D3/LuaSnip'},
         -- Snippet Collection (Optional)
-        -- {'rafamadriz/friendly-snippets'},
+        {'rafamadriz/friendly-snippets'},
 
         -- nice ui Snippet
         -- lspsaga

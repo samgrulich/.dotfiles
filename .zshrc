@@ -122,3 +122,11 @@ if [ -f '/home/sam/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/sam
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/sam/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/sam/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# pnpm
+export PNPM_HOME="/home/sam/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
