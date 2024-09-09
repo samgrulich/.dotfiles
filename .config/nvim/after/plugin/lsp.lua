@@ -28,15 +28,8 @@ lsp.ensure_installed({
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
+-- lsp.configure('java', {
+-- })
 
 local cmp_status, cmp = pcall(require, 'cmp')
 if not cmp_status then 

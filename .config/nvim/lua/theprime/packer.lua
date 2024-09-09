@@ -30,6 +30,13 @@ return require('packer').startup(function(use)
   use {
       'nvim-treesitter/nvim-treesitter', 
   }
+  use {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+        require("nvim-autopairs").setup {}
+    end
+  }
   use('windwp/nvim-ts-autotag')
 
   -- Error table
