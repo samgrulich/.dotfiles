@@ -110,7 +110,7 @@ alias ssh='kitten ssh'
 alias new='kitty --detach'
 alias vim=nvim
 alias config='/usr/bin/git --git-dir=/home/sam/.dotfiles/ --work-tree=/home/sam'
-export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/bin:$HOME/maple2024//bin:$PATH
 
 source ~/Downloads/powerlevel10k/powerlevel10k.zsh-theme
 

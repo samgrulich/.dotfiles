@@ -21,7 +21,7 @@ vim.filetype.add {
 lsp.preset('recommended')
 
 lsp.ensure_installed({
-    'tsserver',
+    -- 'tsserver',
     'eslint',
     'rust_analyzer',
     'wgsl_analyzer'
