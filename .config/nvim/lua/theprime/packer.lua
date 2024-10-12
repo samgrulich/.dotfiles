@@ -16,6 +16,9 @@ return require('packer').startup(function(use)
   -- Status Line
   use 'nvim-lualine/lualine.nvim'
 
+  -- Colorizer 
+  use 'norcalli/nvim-colorizer.lua'
+
   -- Fuzz finders
   use 'theprimeagen/harpoon'
   use {

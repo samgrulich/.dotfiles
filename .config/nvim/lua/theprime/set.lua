@@ -20,3 +20,6 @@ vim.opt.clipboard:append("unnamedplus")
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.g.termguicolors = true
+vim.opt.termguicolors = true
+vim.o.termguicolors = true
