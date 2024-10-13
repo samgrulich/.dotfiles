@@ -168,7 +168,7 @@ workspace $ws2 output DisplayPort-2
 assign [class="(?i)firefox"] $ws2
 assign [class="(?i)spotify"] $ws4
 assign [class="(?i)slack"] $ws9
-assign [class="(?i)notion-app"] $ws10
+assign [class="(?i)notion"] $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -252,4 +252,4 @@ exec --no-startup-id firefox
 exec --no-startup-id kitty
 exec --no-startup-id spotify
 exec --no-startup-id slack
-exec --no-startup-id notion-app
+exec --no-startup-id notion
