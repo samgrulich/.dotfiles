@@ -9,13 +9,14 @@ killall -q polybar
 # polybar bar 2>&1 | tee -a /tmp/polybar.log & diown
 
 
-MONITORS=$(xrandr --query)
+MONITORS=$(xrandr --query | grep "\<connected\>")
 BAR_NAME=bar
 BAR_CONFIG=/home/$USER/.config/polybar/config.ini
 
 PRIMARY=$($MONITORS | grep " connected" | grep    "primary" | cut -d" " -f1)
 OTHERS=$($MONITORS  | grep " connected" | grep -v "primary" | cut -d" " -f1)
 
+echo "${#MONITORS[@]} monitors detected"
 if [[ ${#MONITORS[@]} -eq 1 ]]; then
     polybar --reload -c "$BAR_CONFIG" $BAR_NAME &
     exit
