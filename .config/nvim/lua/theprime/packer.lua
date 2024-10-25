@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
   use 'theprimeagen/harpoon'
   use {
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
-    requires = { 
+    requires = {
         'nvim-lua/plenary.nvim',
         'burntsushi/ripgrep',
         'sharkdp/fd'
@@ -31,7 +31,7 @@ return require('packer').startup(function(use)
   }
 
   use {
-      'nvim-treesitter/nvim-treesitter', 
+      'nvim-treesitter/nvim-treesitter',
   }
   use {
       "windwp/nvim-autopairs",
@@ -52,6 +52,9 @@ return require('packer').startup(function(use)
         }
       end
   })
+
+  -- Markdown preview
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- Debugging (dap)
   use 'mfussenegger/nvim-dap'
