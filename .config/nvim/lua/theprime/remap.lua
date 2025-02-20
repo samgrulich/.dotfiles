@@ -42,3 +42,6 @@ nnoremap("<leader>=",  "<C-w>=<CR>")
 
 -- disable copilot 
 nnoremap("<leader>0", "<cmd>Copilot disable<CR>")
+
+-- LSP 
+nnoremap("<leader>f", "<cmd>LspZeroFormat<CR>")
