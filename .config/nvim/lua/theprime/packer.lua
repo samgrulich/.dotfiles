@@ -65,6 +65,11 @@ return require('packer').startup(function(use)
   -- use 'github/copilot.vim'
   -- use 'zbirenbaum/copilot.lua'
 
+  -- Iron - repl
+  use 'Vigemus/iron.nvim'
+  -- Jupyter plugins
+  use 'goerz/jupytext.nvim'
+
   -- lsp 
   use {
     'VonHeikemen/lsp-zero.nvim',
