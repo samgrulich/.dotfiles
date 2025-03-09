@@ -1,1 +1,3 @@
-require("theprime")
+require("config.lazy")
+require("config.remap")
+require("config.alpha")
