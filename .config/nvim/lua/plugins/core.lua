@@ -26,7 +26,4 @@ return {
 	{
 		"williamboman/mason.nvim",
 	},
-	{
-		"echasnovski/mini.hipatterns",
-	},
 }
