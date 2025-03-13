@@ -86,7 +86,7 @@ return {
       scope = { enabled = true },
       scroll = { enabled = true },
       statuscolumn = { enabled = false }, -- we set this in options.lua
-      -- toggle = { map = LazyVim.safe_keymap_set },
+      toggle = { map = LazyVim.safe_keymap_set },
       words = { enabled = true },
     },
     -- stylua: ignore
@@ -107,9 +107,9 @@ return {
     opts = {
       dashboard = {
         preset = {
-          -- pick = function(cmd, opts)
-          --   return LazyVim.pick(cmd, opts)()
-          -- end,
+          pick = function(cmd, opts)
+            return LazyVim.pick(cmd, opts)()
+          end,
           header = [[
  _   _                            ____ ___  ____ ___ _   _  ____   _ 
 | | | | __ _ _ __  _ __  _   _   / ___/ _ \|  _ \_ _| \ | |/ ___| | |

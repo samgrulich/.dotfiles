@@ -18,29 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-vim.opt.guicursor = ""
-
-vim.opt.nu = true
-vim.opt.relativenumber = true
-
-local spaces = 4
-vim.opt.tabstop = spaces
-vim.opt.softtabstop = spaces
-vim.opt.shiftwidth = spaces
-vim.opt.expandtab = true
-vim.opt.smartindent = true
-
-vim.opt.wrap = false
-vim.opt.clipboard:append("unnamedplus")
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
-vim.g.termguicolors = true
-vim.opt.termguicolors = true
-vim.o.termguicolors = true
 
 vim.cmd([[colorscheme retrobox]])
 
@@ -56,3 +33,4 @@ require("lazy").setup({
 	-- automatically check for plugin updates
 	checker = { enabled = true },
 })
+

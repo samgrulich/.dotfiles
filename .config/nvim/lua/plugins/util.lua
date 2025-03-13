@@ -16,6 +16,7 @@ return {
     opts = {
       bigfile = { enabled = true },
       quickfile = { enabled = true },
+      explorer = { enable = false },
       terminal = {
         win = {
           keys = {

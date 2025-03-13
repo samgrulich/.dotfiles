@@ -15,7 +15,7 @@ return {
       markdown = true,
     },
     config = function(_, opts)
-      -- LazyVim.mini.pairs(opts)
+      LazyVim.mini.pairs(opts)
     end,
   },
 
@@ -47,7 +47,7 @@ return {
             { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
             "^().*()$",
           },
-          -- g = LazyVim.mini.ai_buffer, -- buffer
+          g = LazyVim.mini.ai_buffer, -- buffer
           u = ai.gen_spec.function_call(), -- u for "Usage"
           U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
         },
@@ -55,11 +55,11 @@ return {
     end,
     config = function(_, opts)
       require("mini.ai").setup(opts)
-      -- LazyVim.on_load("which-key.nvim", function()
-      --   vim.schedule(function()
-      --     LazyVim.mini.ai_whichkey(opts)
-      --   end)
-      -- end)
+      LazyVim.on_load("which-key.nvim", function()
+        vim.schedule(function()
+          LazyVim.mini.ai_whichkey(opts)
+        end)
+      end)
     end,
   },
 
