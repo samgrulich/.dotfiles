@@ -29,7 +29,7 @@ return {
   -- location.
   {
     "folke/flash.nvim",
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     vscode = true,
     ---@type Flash.Config
     opts = {},
@@ -47,7 +47,7 @@ return {
   -- with the active keybindings of the command you started typing.
   {
     "folke/which-key.nvim",
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     opts_extend = { "spec" },
     opts = {
       preset = "helix",
@@ -111,7 +111,7 @@ return {
       local wk = require("which-key")
       wk.setup(opts)
       if not vim.tbl_isempty(opts.defaults) then
-        -- LazyVim.warn("which-key: opts.defaults is deprecated. Please use opts.spec instead.")
+        print("which-key: opts.defaults is deprecated. Please use opts.spec instead.")
         wk.register(opts.defaults)
       end
     end,
@@ -171,7 +171,7 @@ return {
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
-    -- event = "LazyFile",
+    event = "VeryLazy",
     opts = {},
     -- stylua: ignore
     keys = {
