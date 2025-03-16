@@ -3,13 +3,13 @@ local map = vim.keymap.set
 -- split manipulation
 map("n", "<leader>n", "<C-w>v<CR>", { desc = "Split Vertically" })
 map("n", "<leader>v", "<C-w>n<CR>", { desc = "Split Horizontally " })
-map("n", "<leader>sn", "<C-w>v<cmd>Ex<CR>", { desc = "Split Vertically & Open FileEx" })
-map("n", "<leader>sv", "<C-w>n<cmd>Ex<CR>", { desc = "Split Horizontally & Open FileEx" })
+map("n", "<leader>en", "<C-w>v<cmd>Ex<CR>", { desc = "Split Vertically & Open FileEx" })
+map("n", "<leader>ev", "<C-w>n<cmd>Ex<CR>", { desc = "Split Horizontally & Open FileEx" })
 
-map("n", "<leader>h", "<C-w>h", { desc = "Go Left"})
-map("n", "<leader>j", "<C-w>j", { desc = "Go Down"})
-map("n", "<leader>k", "<C-w>k", { desc = "Go Up"})
-map("n", "<leader>l", "<C-w>l", { desc = "Go Right"})
+map("n", "<leader>h", "<C-w>h", { desc = "Go Left" })
+map("n", "<leader>j", "<C-w>j", { desc = "Go Down" })
+map("n", "<leader>k", "<C-w>k", { desc = "Go Up" })
+map("n", "<leader>l", "<C-w>l", { desc = "Go Right" })
 
 map("n", "<leader>H", "<C-w>H<CR>", { desc = "Move win Left" })
 map("n", "<leader>J", "<C-w>J<CR>", { desc = "Move win Down" })
@@ -22,29 +22,50 @@ map("n", "<C-Left>", "10<C-w><<CR>", { desc = "Win size horizontal--" })
 map("n", "<C-Right>", "10<C-w>><CR>", { desc = "Win size horizontal++" })
 map("n", "<C-Down>", "10<C-w>+<CR>", { desc = "Win size vertical++" })
 
-map("n", "<leader>ff", "<C-w>|<C-w>_<CR>", { desc = "Fullscreen current tab" })
+map("n", "<leader>fc", "<C-w>|<C-w>_<CR>", { desc = "Fullscreen current tab" })
 map("n", "<leader>fn", "<C-w>|<CR>", { desc = "Fullscreen current tab horizontally" })
-map("n", "<leader>vn", "<C-w>_<CR>", { desc = "Fullscreen current tab vertically" })
+map("n", "<leader>fv", "<C-w>_<CR>", { desc = "Fullscreen current tab vertically" })
 map("n", "<leader>=", "<C-w>=<CR>", { desc = "Equalize all tabs" })
 
 -- files
-map("n", "<leader>sf", "<cmd>Ex<CR>", { desc = "Open FileEx"})
+map("n", "<leader>ef", "<cmd>Ex<CR>", { desc = "Open FileEx" })
 
 -- centered movement
-map("n", "<C-d>", "<C-d>zz", { desc = "Move half page down (and center) "})
-map("n", "<C-u>", "<C-u>zz", { desc = "Move half page up   (and center) "})
+map("n", "<C-d>", "<C-d>zz", { desc = "Move half page down (and center) " })
+map("n", "<C-u>", "<C-u>zz", { desc = "Move half page up   (and center) " })
 
 -- disable copilot
 map("n", "<leader>0", "<cmd>Copilot disable<CR>", { desc = "Disable copilot" })
 
--- -- Move Lines
--- map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
--- map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
--- map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
--- map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
--- map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
--- map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
---
+-- Move Lines
+map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+
+-- lsp
+-- TODO
+map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
+map("n", "gr", vim.lsp.buf.references, { desc = "References" })
+map("n", "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
+map("n", "gy", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition" })
+map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+map({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, { desc = "Run Codelens" })
+map("n", "<leader>cC", vim.lsp.codelens.refresh, { desc = "Refresh & Display Codelens" })
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+-- map("n", "K", function()
+-- 	return vim.lsp.buf.hover()
+-- end, { desc = "Hover" })
+-- map("n", "gK", function()
+-- 	return vim.lsp.buf.signature_help()
+-- end, { desc = "Signature Help" })
+-- map("n", "<c-k>", function()
+-- 	return vim.lsp.buf.signature_help()
+-- end, { mode = "i", desc = "Signature Help" })
+
 -- -- buffers
 -- map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 -- map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
@@ -103,23 +124,23 @@ map("n", "<leader>0", "<cmd>Copilot disable<CR>", { desc = "Disable copilot" })
 --     vim.notify(err, vim.log.levels.ERROR)
 --   end
 -- end, { desc = "Location List" })
---
--- -- quickfix list
--- map("n", "<leader>xq", function()
---   local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
---   if not success and err then
---     vim.notify(err, vim.log.levels.ERROR)
---   end
--- end, { desc = "Quickfix List" })
---
--- map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
--- map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
---
--- -- formatting
--- -- map({ "n", "v" }, "<leader>cf", function()
--- --   Utils.format({ force = true })
--- -- end, { desc = "Format" })
---
+
+-- quickfix list
+map("n", "<leader>xq", function()
+	local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+	if not success and err then
+		vim.notify(err, vim.log.levels.ERROR)
+	end
+end, { desc = "Quickfix List" })
+
+map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+-- formatting
+map({ "n", "v" }, "<leader>cf", function()
+	require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = "Format" })
+
 -- -- diagnostic
 -- local diagnostic_goto = function(next, severity)
 --   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -173,11 +194,11 @@ map("n", "<leader>0", "<cmd>Copilot disable<CR>", { desc = "Disable copilot" })
 -- -- map("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "Terminal (Root Dir)" })
 -- -- map("n", "<c-/>",      function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "Terminal (Root Dir)" })
 -- -- map("n", "<c-_>",      function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "which_key_ignore" })
---
--- -- Terminal Mappings
--- map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
--- map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
---
+
+-- Terminal Mappings
+map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+
 -- -- windows
 -- map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 -- map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
