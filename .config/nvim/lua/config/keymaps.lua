@@ -3,8 +3,8 @@ local map = vim.keymap.set
 -- split manipulation
 map("n", "<leader>n", "<C-w>v<CR>", { desc = "Split Vertically" })
 map("n", "<leader>v", "<C-w>n<CR>", { desc = "Split Horizontally " })
-map("n", "<leader>sn", "<C-w>v<cmd>Ex<CR>", { desc = "Split Vertically & Open FileEx" })
-map("n", "<leader>sv", "<C-w>n<cmd>Ex<CR>", { desc = "Split Horizontally & Open FileEx" })
+map("n", "<leader>en", "<C-w>v<cmd>Ex<CR>", { desc = "Split Vertically & Open FileEx" })
+map("n", "<leader>ev", "<C-w>n<cmd>Ex<CR>", { desc = "Split Horizontally & Open FileEx" })
 
 map("n", "<leader>h", "<C-w>h", { desc = "Go Left" })
 map("n", "<leader>j", "<C-w>j", { desc = "Go Down" })
@@ -22,13 +22,13 @@ map("n", "<C-Left>", "10<C-w><<CR>", { desc = "Win size horizontal--" })
 map("n", "<C-Right>", "10<C-w>><CR>", { desc = "Win size horizontal++" })
 map("n", "<C-Down>", "10<C-w>+<CR>", { desc = "Win size vertical++" })
 
-map("n", "<leader>ff", "<C-w>|<C-w>_<CR>", { desc = "Fullscreen current tab" })
+map("n", "<leader>fc", "<C-w>|<C-w>_<CR>", { desc = "Fullscreen current tab" })
 map("n", "<leader>fn", "<C-w>|<CR>", { desc = "Fullscreen current tab horizontally" })
-map("n", "<leader>vn", "<C-w>_<CR>", { desc = "Fullscreen current tab vertically" })
+map("n", "<leader>fv", "<C-w>_<CR>", { desc = "Fullscreen current tab vertically" })
 map("n", "<leader>=", "<C-w>=<CR>", { desc = "Equalize all tabs" })
 
 -- files
-map("n", "<leader>sf", "<cmd>Ex<CR>", { desc = "Open FileEx" })
+map("n", "<leader>ef", "<cmd>Ex<CR>", { desc = "Open FileEx" })
 
 -- centered movement
 map("n", "<C-d>", "<C-d>zz", { desc = "Move half page down (and center) " })
@@ -52,6 +52,10 @@ map("n", "gr", vim.lsp.buf.references, { desc = "References" })
 map("n", "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
 map("n", "gy", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition" })
 map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+map({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, { desc = "Run Codelens" })
+map("n", "<leader>cC", vim.lsp.codelens.refresh, { desc = "Refresh & Display Codelens" })
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 -- map("n", "K", function()
 -- 	return vim.lsp.buf.hover()
 -- end, { desc = "Hover" })

@@ -10,7 +10,7 @@ return {
 				enabled = true,
 				auto_trigger = true,
 				keymap = {
-					accept = "<C-;>", -- handled by nvim-cmp / blink.cmp
+					accept = "<M-;>", -- handled by nvim-cmp / blink.cmp
 					next = "<M-]>",
 					prev = "<M-[>",
 				},
