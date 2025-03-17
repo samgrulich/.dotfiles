@@ -33,7 +33,7 @@ return {
 				end,
 				-- How the repl window will be displayed
 				-- See below for more information
-				repl_open_cmd = view.right(70),
+				-- repl_open_cmd = view.right(70),
 
 				-- repl_open_cmd can also be an array-style table so that multiple
 				-- repl_open_commands can be given.
@@ -43,11 +43,13 @@ return {
 				-- be available as a keymap (see `keymaps` below) with the names
 				-- toggle_repl_with_cmd_1, ..., toggle_repl_with_cmd_k
 				-- For example,
-				--
-				-- repl_open_cmd = {
-				--   view.split.vertical.rightbelow("%40"), -- cmd_1: open a repl to the right
-				--   view.split.rightbelow("%25")  -- cmd_2: open a repl below
-				-- }
+
+				repl_open_cmd = {
+					view.split.vertical.rightbelow("%40"), -- cmd_1: open a repl to the right
+					view.split.rightbelow("%25"), -- cmd_2: open a repl below
+				},
+				-- Differently from `view.center`, all arguments are required
+				-- and no defaults will be applied if something is missing.
 			},
 			-- Iron doesn't set keymaps by default anymore.
 			-- You can set them here or manually add keymaps to the functions in iron.core
