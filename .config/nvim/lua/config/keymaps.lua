@@ -16,6 +16,13 @@ map("n", "<leader>J", "<C-w>J<CR>", { desc = "Move win Down" })
 map("n", "<leader>K", "<C-w>K<CR>", { desc = "Move win Up" })
 map("n", "<leader>L", "<C-w>L<CR>", { desc = "Move win Right" })
 
+-- Terminal Mappings
+map("t", "<ESC>", "<C-\\><C-n>", { desc = "Terminal exit" })
+map("t", "<leader>h", "<C-\\><C-n><C-w>h", { desc = "Go Left" })
+map("t", "<leader>j", "<C-\\><C-n><C-w>j", { desc = "Go Down" })
+map("t", "<leader>k", "<C-\\><C-n><C-w>k", { desc = "Go Up" })
+map("t", "<leader>l", "<C-\\><C-n><C-w>l", { desc = "Go Right" })
+
 --resize
 map("n", "<C-Up>", "10<C-w>-<CR>", { desc = "Win size vertical--" })
 map("n", "<C-Left>", "10<C-w><<CR>", { desc = "Win size horizontal--" })
