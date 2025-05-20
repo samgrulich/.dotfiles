@@ -239,6 +239,7 @@ gaps outer 0
 gaps inner 8
 
 # autostart
+exec --no-startup-id "xinput disable 9"
 exec --no-startup-id "xrandr --output HDMI-A-0 --primary"
 exec --no-startup-id "setxkbmap -model pc104 -layout us,cz -option grp:lctrl_lwin_toggle"
 exec --no-startup-id "redshift-gtk -l 50:14 -t 4000:2600"

@@ -1,6 +1,6 @@
 return {
 	"hkupty/iron.nvim",
-	ft = { "python", "racket" },
+	ft = { "python", "racket", "haskell" },
 	config = function()
 		local view = require("iron.view")
 		local common = require("iron.fts.common")
@@ -21,6 +21,9 @@ return {
 						command = { "python3" }, -- or { "ipython", "--no-autoindent" }
 						format = common.bracketed_paste_python,
 						block_deviders = { "# %%", "#%%" },
+					},
+					haskell = {
+						command = { "ghci" },
 					},
 				},
 				-- set the file type of the newly created repl to ft
