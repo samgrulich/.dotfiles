@@ -19,7 +19,19 @@ return {
 			-- for the complete list use :h lspconfig-all
 			local servers = {
 				lua_ls = {},
-				pyright = {},
+				pyright = {
+					-- python = {
+					-- 	analysis = {
+					-- 		ignore = { "*" },
+					-- 	},
+					-- },
+					-- capabilities = (function()
+					-- 	local capabilities = vim.lsp.protocol.make_client_capabilities()
+					-- 	capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+					-- 	return capabilities
+					-- end)(),
+				},
+				-- ruff = {},
 				clangd = {},
 				svelte = {},
 				tailwindcss = {},
@@ -33,13 +45,13 @@ return {
 
 			require("mason-lspconfig").setup({ ensure_installed = ensure_installed, automatic_installation = false })
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			require("mason-lspconfig").setup_handlers({
-				function(server_name)
-					local server = servers[server_name] or {}
-					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-					require("lspconfig")[server_name].setup(server)
-				end,
-			})
+			-- require("mason-lspconfig").setup_handlers({
+			-- 	function(server_name)
+			-- 		local server = servers[server_name] or {}
+			-- 		server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+			-- 		require("lspconfig")[server_name].setup(server)
+			-- 	end,
+			-- })
 
 			require("lspconfig").racket_langserver.setup({})
 
@@ -48,6 +60,9 @@ return {
 					local c = vim.lsp.get_client_by_id(args.data.client_id)
 					if not c then
 						return
+					end
+					if c.name == "ruff" then
+						c.server_capabilities.hoverProvider = false
 					end
 				end,
 			})

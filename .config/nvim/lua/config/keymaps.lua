@@ -53,7 +53,7 @@ map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc 
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- lsp
--- TODO
+-- TODO:
 map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
 map("n", "gr", vim.lsp.buf.references, { desc = "References" })
 map("n", "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation" })

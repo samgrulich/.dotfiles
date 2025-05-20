@@ -22,6 +22,9 @@ return {
 						format = common.bracketed_paste_python,
 						block_deviders = { "# %%", "#%%" },
 					},
+					haskell = {
+						command = { "ghci" },
+					},
 				},
 				-- set the file type of the newly created repl to ft
 				-- bufnr is the buffer id of the REPL and ft is the filetype of the
