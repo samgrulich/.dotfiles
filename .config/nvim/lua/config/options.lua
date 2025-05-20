@@ -61,15 +61,15 @@ opt.confirm = false -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
 opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+	foldopen = "",
+	foldclose = "",
+	fold = " ",
+	foldsep = " ",
+	diff = "╱",
+	eob = " ",
 }
 opt.foldlevel = 99
-opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
+opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -99,8 +99,9 @@ opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
-opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 opt.tabstop = 4 -- Number of spaces tabs count for
+opt.softtabstop = 4 -- Number of spaces tabs count for
+opt.shiftwidth = 4 -- Size of an indent
 opt.termguicolors = true -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
 opt.undofile = true
@@ -112,14 +113,27 @@ opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
+	opt.smoothscroll = true
+	opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+	opt.foldmethod = "expr"
+	opt.foldtext = ""
 else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+	opt.foldmethod = "indent"
+	opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
 end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+local set_short_indentation = function()
+	vim.bo.tabstop = 2
+	vim.bo.shiftwidth = 2
+	vim.opt.softtabstop = 2
+	vim.bo.expandtab = true
+end
+
+-- Autocmd for HTML files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "html", "javascript", "typescript", "svelte", "lua", "racket", "haskell" },
+	callback = set_short_indentation,
+})
