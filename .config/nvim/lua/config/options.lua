@@ -134,6 +134,6 @@ end
 
 -- Autocmd for HTML files
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "html", "javascript", "typescript", "svelte", "lua", "racket", "haskell" },
+	pattern = { "html", "svelte", "lua", "racket", "haskell", "sql" },
 	callback = set_short_indentation,
 })
