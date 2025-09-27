@@ -5,6 +5,10 @@ vim.g.maplocalleader = "\\"
 -- LazyVim auto format
 vim.g.autoformat = true
 
+-- Snacks animations
+-- Set to `false` to globally disable all snacks animations
+vim.g.snacks_animate = false
+
 -- LazyVim picker to use.
 -- Can be one of: telescope, fzf
 -- Leave it to "auto" to automatically use the picker
@@ -130,6 +134,6 @@ end
 
 -- Autocmd for HTML files
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "html", "javascript", "typescript", "svelte", "lua", "racket" },
+	pattern = { "html", "svelte", "lua", "racket", "haskell", "sql" },
 	callback = set_short_indentation,
 })

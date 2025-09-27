@@ -10,3 +10,6 @@ PS1='[\u@\h \W]\$ '
 alias config='/usr/bin/git --git-dir=/home/sam/.dotfiles/ --work-tree=/home/sam'
 alias vim=nvim
 export PATH=$HOME/.cargo/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/share/nvm/init-nvm.sh" ] && \. "/usr/share/nvm/init-nvm.sh"

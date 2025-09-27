@@ -43,17 +43,15 @@ return {
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 
-			require("mason-lspconfig").setup({ ensure_installed = ensure_installed, automatic_installation = false })
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			-- require("mason-lspconfig").setup_handlers({
-			-- 	function(server_name)
-			-- 		local server = servers[server_name] or {}
-			-- 		server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-			-- 		require("lspconfig")[server_name].setup(server)
-			-- 	end,
-			-- })
+			for server_name, config in pairs(servers) do
+				config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
+				vim.lsp.config(server_name, config)
+			end
 
-			require("lspconfig").racket_langserver.setup({})
+			require("mason-lspconfig").setup({ ensure_installed = ensure_installed, automatic_installation = false })
+
+			vim.lsp.config("racket_langserver", {})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)

@@ -2,6 +2,7 @@ return {
 	-- copilot
 	{
 		"zbirenbaum/copilot.lua",
+		enabled = false,
 		cmd = "Copilot",
 		build = ":Copilot auth",
 		event = "BufReadPost",

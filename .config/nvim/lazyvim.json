@@ -1,10 +1,14 @@
 {
   "extras": [
+    "lazyvim.plugins.extras.editor.dial",
+    "plugins.extras.ai.copilot",
+    "plugins.extras.coding.yanky",
+    "plugins.extras.editor.dial",
+    "plugins.extras.editor.inc-rename",
+    "plugins.extras.editor.snacks_picker"
+  ],
+  "news": [
 
   ],
-  "install_version": 8,
-  "news": {
-    "NEWS.md": "10960"
-  },
   "version": 8
 }

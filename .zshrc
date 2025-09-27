@@ -133,3 +133,12 @@ esac
 
 # Created by `pipx` on 2025-03-03 09:51:09
 export PATH="$PATH:/home/sam/.local/bin"
+export PYTORCH_ROCM_ARCH="gfx1030"
+export HSA_OVERRIDE_GFX_VERSION="10.3.0"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/share/nvm/init-nvm.sh" ] && \. "/usr/share/nvm/init-nvm.sh"

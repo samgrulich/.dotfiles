@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -239,8 +239,8 @@ gaps outer 0
 gaps inner 8
 
 # autostart
-exec --no-startup-id "xrandr --output HDMI-A-0 --primary"
-exec --no-startup-id "xrandr --output HDMI-A-0 --left-of DisplayPort-1"
+exec --no-startup-id "xinput disable 9"
+exec --no-startup-id "xrandr --output HDMI-A-0 --primary --left-of DisplayPort-1 --mode 2560x1440 --rate 144.00"
 exec --no-startup-id "setxkbmap -model pc104 -layout us,cz -option grp:lctrl_lwin_toggle"
 exec --no-startup-id "redshift-gtk -l 50:14 -t 4000:2600"
 exec --no-startup-id "picom -b"
