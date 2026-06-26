@@ -218,13 +218,11 @@ function WifiRow({
 
           <box orientation={Gtk.Orientation.VERTICAL}>
             <label label={item.ssid} xalign={0} />
-
-            <label class="dim" label={`${item.signal}% `} xalign={0} />
           </box>
         </box>
 
         <box $type="end" spacing={6}>
-          <image visible={item.active} iconName="emblem-default-symbolic" />
+          <image visible={item.active} iconName="object-select-symbolic" />
         </box>
       </centerbox>
 
@@ -244,11 +242,6 @@ function WifiRow({
           <centerbox>
             <label $type="start" label="Security" xalign={0} />
             <label $type="end" label={item.security} xalign={1} />
-          </centerbox>
-
-          <centerbox>
-            <label $type="start" label="Saved" xalign={0} />
-            <label $type="end" label={item.known ? "Yes" : "No"} xalign={1} />
           </centerbox>
 
           <entry

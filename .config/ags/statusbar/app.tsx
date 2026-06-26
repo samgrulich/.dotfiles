@@ -1,5 +1,6 @@
 import app from "ags/gtk4/app"
 import style from "./style.scss"
+import { Astal, Gtk, Gdk } from "ags/gtk4"
 import Clock from "./widget/Clock"
 import Workspaces from "./widget/Workspaces"
 import Archicon from "./widget/Archicon"
@@ -7,10 +8,14 @@ import Audio from "./widget/Audio"
 import Battery from "./widget/Battery"
 import Keyboard from "./widget/Keyboard"
 import Network from "./widget/Network"
-import { Astal, Gtk, Gdk } from "ags/gtk4"
+import Tray from "./widget/Tray"
+import Mpris from "./widget/Mpris"
+import NotificationPopups from "./widget/Notifications"
 
 function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
+
+  const geometry = gdkmonitor.get_geometry()
 
   return (
     <window
@@ -20,16 +25,22 @@ function Bar(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
+      // anchor={TOP}
       application={app}
+      // widthRequest={geometry.width * 0.8}
+      // widthRequest={1200}
     >
       <centerbox orientation={Gtk.Orientation.HORIZONTAL}>
         <box $type="start">
           <Archicon />
           <Workspaces />
         </box>
+        <box $type="center">
+          <Mpris />
+          {/* <NotificationPopups /> */}
+        </box>
         <box $type="end">
-          {/* TODO:  Media Player */}
-          {/* TODO: App Tray */}
+          <Tray />
           <Network />
           <Keyboard />
           <Audio />

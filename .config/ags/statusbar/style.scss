@@ -26,21 +26,19 @@ switch {
   }
 }
 
-.rotating {
-  transition: -gtk-icon-transform 200ms ease;
-}
-
-button:hover .rotating {
-  -gtk-icon-transform: rotate(90deg);
-}
-
 window.Bar {
   background: transparent;
   color: $fg-color;
+  padding-top: 4px;
 
   > box {
-    background: $bg-color;
-    color: $fg-color;
+    > box {
+      background: $bg-color;
+      color: $fg-color;
+      padding: 4px 20px;
+      // border-radius: 0 0 13px 13px;
+      border-radius: 13px;
+    }
   }
 
   button {
@@ -62,7 +60,7 @@ window.Bar {
 
   .Workspaces {
     > button {
-      padding: 5px 20px;
+      padding: 1px 4px;
     }
 
     .focused {
@@ -76,7 +74,7 @@ window.Bar {
   }
 
   .Archicon {
-    padding: 0 20px;
+    padding: 0 18px 0 0;
   }
 
   .Audio {
@@ -90,6 +88,11 @@ window.Bar {
   .NetworkPopup {
     min-width: 400px;
     color: $fg-color;
+  }
+
+  .MprisIcon {
+    color: white;
+    fill: white;
   }
 }
 

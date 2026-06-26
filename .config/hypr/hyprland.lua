@@ -41,8 +41,8 @@ local menu = "rofi"
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd(terminal)
-	hl.exec_cmd("systemctl --user status hyprpolkitagent")
 	hl.exec_cmd("waybar & hyprpaper & hypridle & hyprsunset")
+	-- hl.exec_cmd("nm-applet")
 	hl.exec_cmd("firefox", { workspace = "2", no_initial_focus = true }) -- Start firefox on workspace 2
 end)
 
@@ -81,7 +81,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.config({
 	general = {
 		gaps_in = 5,
-		gaps_out = 10,
+		gaps_out = 4,
 
 		border_size = 2,
 
