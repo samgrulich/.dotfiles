@@ -41,7 +41,8 @@ local menu = "rofi"
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd(terminal)
-	hl.exec_cmd("waybar & hyprpaper & hypridle & hyprsunset")
+	hl.exec_cmd("ags run ~/.config/ags/statusbar ")
+	hl.exec_cmd("hyprpaper & hypridle & hyprsunset")
 	-- hl.exec_cmd("nm-applet")
 	hl.exec_cmd("firefox", { workspace = "2", no_initial_focus = true }) -- Start firefox on workspace 2
 end)
@@ -160,6 +161,20 @@ hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almo
 hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
+
+hl.layer_rule({
+	name = "gtk4-layer-shell",
+	match = { namespace = "gtk4-layer-shell" },
+
+	blur = true,
+	blur_popups = true,
+	ignore_alpha = 0.2,
+
+	-- Try one of these:
+	-- animation = "popin 85%",
+	-- animation = "slide top",
+	animation = "slidefade top",
+})
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"

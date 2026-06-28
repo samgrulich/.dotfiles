@@ -1,6 +1,8 @@
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
 $fg-color: #eadab2;
 $bg-color: #1c1c1c;
+// $accent-color: #363636;
+$accent-color: #212121;
 
 * {
   color: $fg-color;
@@ -26,83 +28,58 @@ switch {
   }
 }
 
-window.Bar {
-  background: transparent;
-  color: $fg-color;
-  padding-top: 4px;
-
-  > box {
-    > box {
-      background: $bg-color;
-      color: $fg-color;
-      padding: 4px 20px;
-      // border-radius: 0 0 13px 13px;
-      border-radius: 13px;
-    }
-  }
-
-  button {
-    border-radius: 8px;
-    padding: 2px;
+scale {
+  slider {
+    opacity: 0;
+    min-width: 4px;
     margin: 0px;
-  }
 
-  .Clock {
-    .CalendarTimeLabel {
-      font-size: 20px;
-      font-weight: bold;
-      padding: 5px;
-    }
-
-    .CalendarDateLabel {
-    }
-  }
-
-  .Workspaces {
-    > button {
-      padding: 1px 4px;
-    }
-
-    .focused {
-      background: $fg-color;
-      color: $bg-color;
-
-      > label {
-        color: $bg-color;
-      }
-    }
-  }
-
-  .Archicon {
-    padding: 0 18px 0 0;
-  }
-
-  .Audio {
-    padding: 0 10px;
-
-    > label {
-      margin-left: 6px;
-    }
-  }
-
-  .NetworkPopup {
-    min-width: 400px;
-    color: $fg-color;
-  }
-
-  .MprisIcon {
-    color: white;
-    fill: white;
+    background-image: none;
+    background-color: $fg-color;
   }
 }
 
-.NetworkPopup {
-  padding: 12px;
-  min-width: 340px;
+separator {
+  background: rgba($fg-color, 0.2);
 }
 
-.NetworkSection {
+button {
+  border-radius: 8px;
+  padding: 0em 0.4em;
+  margin: 0 2px;
+  min-width: 20px;
+  background: $accent-color;
+}
+
+label {
+  border-radius: 8px;
+}
+
+popover {
+  arrow {
+    background: $bg-color;
+  }
+
+  contents {
+    background: $bg-color;
+    transition: all 200ms;
+  }
+}
+
+calendar {
   padding: 4px;
+  border-radius: 13px;
+
+  background: $accent-color;
+
+  header {
+    padding-top: 2px;
+    padding-bottom: 4px;
+  }
+}
+
+.error {
+  color: #ff6b6b;
 }
 
 .title {
@@ -119,24 +96,66 @@ window.Bar {
   opacity: 0.65;
 }
 
-.ApRow {
-  padding: 6px;
-  border-radius: 8px;
+window.Bar {
+  background: transparent;
+  color: $fg-color;
+  padding-top: 4px;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+  > box {
+    > box {
+      background: $bg-color;
+      color: $fg-color;
+      padding: 4px 10px;
+      border-radius: 13px;
+    }
   }
 
-  &.active {
-    background-color: rgba(255, 255, 255, 0.12);
+  .Clock {
+    .CalendarTimeLabel {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+
+    .CalendarDateLabel {
+      margin: 5px;
+    }
   }
-}
 
-.ApPopover {
-  padding: 10px;
-  min-width: 260px;
-}
+  .Workspaces {
+    .focused {
+      background: $fg-color;
+      color: $bg-color;
 
-.error {
-  color: #ff6b6b;
+      > label {
+        color: $bg-color;
+      }
+    }
+  }
+
+  .Audio {
+    > button > box {
+      min-width: 3.5em;
+    }
+  }
+
+  .Archicon {
+    $offset: 10px;
+    padding: 0 $offset 0 $offset;
+  }
+
+  .Network {
+    padding: 12px;
+    min-width: 340px;
+
+    > box {
+      padding: 4px;
+    }
+  }
+
+  .MprisIcon {
+    color: white;
+    fill: white;
+  }
 }

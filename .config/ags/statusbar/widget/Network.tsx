@@ -292,7 +292,7 @@ function Wifi({ network }: NetworkProps) {
 
   if (!wifi) {
     return (
-      <box orientation={Gtk.Orientation.VERTICAL} class="NetworkSection">
+      <box orientation={Gtk.Orientation.VERTICAL}>
         <label label="Wi-Fi" class="title" xalign={0} />
         <label label="No Wi-Fi adapter" class="dim" xalign={0} />
       </box>
@@ -335,11 +335,7 @@ function Wifi({ network }: NetworkProps) {
   )
 
   return (
-    <box
-      orientation={Gtk.Orientation.VERTICAL}
-      spacing={8}
-      class="NetworkSection"
-    >
+    <box orientation={Gtk.Orientation.VERTICAL} spacing={8}>
       <centerbox>
         <box $type="start" spacing={8}>
           <image iconName={createBinding(wifi, "icon-name")} />
@@ -414,7 +410,7 @@ function Wired({ network }: NetworkProps) {
 
   if (!wired) {
     return (
-      <box orientation={Gtk.Orientation.VERTICAL} class="NetworkSection">
+      <box orientation={Gtk.Orientation.VERTICAL}>
         <label label="Wired" class="title" xalign={0} />
         <label label="No wired adapter" class="dim" xalign={0} />
       </box>
@@ -422,11 +418,7 @@ function Wired({ network }: NetworkProps) {
   }
 
   return (
-    <box
-      orientation={Gtk.Orientation.VERTICAL}
-      spacing={6}
-      class="NetworkSection"
-    >
+    <box orientation={Gtk.Orientation.VERTICAL} spacing={6}>
       <box spacing={8}>
         <image iconName={createBinding(wired, "icon-name")} />
         <label label="Wired" class="title" xalign={0} />
@@ -453,7 +445,7 @@ export default function Network() {
   const primary = createBinding(network, "primary")
 
   return (
-    <menubutton class="Network">
+    <menubutton>
       <With value={primary}>
         {(primary) =>
           primary && primary !== 0 ? (
@@ -474,7 +466,7 @@ export default function Network() {
         <box
           orientation={Gtk.Orientation.VERTICAL}
           spacing={10}
-          class="NetworkPopup"
+          class="Network"
         >
           <Wired network={network} />
           <Gtk.Separator />

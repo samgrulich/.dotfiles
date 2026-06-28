@@ -10,8 +10,8 @@ export default function Clock() {
   const date = createPoll("", 60000, () => {
     const date = GLib.DateTime.new_now_local()
     return (
-      `(${date.get_week_of_year() % 2 == 0 ? "Even" : "Odd"}) ` +
-        date.format("%a %d.%m.%Y")?.toString() || " - "
+      // `(${date.get_week_of_year() % 2 == 0 ? "Even" : "Odd"}) ` +
+      date.format("%a %d.%m")?.toString() || " - "
     )
   })
 
@@ -22,8 +22,8 @@ export default function Clock() {
       <label label={time} />
       <popover>
         <box orientation={Gtk.Orientation.VERTICAL}>
-          <label class="CalendarTimeLabel" label={time_detailed} />
           <label class="CalendarDateLabel" label={date} />
+          <label class="CalendarTimeLabel" label={time_detailed} />
           <Gtk.Calendar />
         </box>
       </popover>

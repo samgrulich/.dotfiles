@@ -33,18 +33,18 @@ export default function Audio() {
 
   return (
     <menubutton>
-      <VolumeIcon className="Audio" />
+      <VolumeIcon />
       <popover>
-        <box orientation={Gtk.Orientation.VERTICAL}>
+        <box orientation={Gtk.Orientation.VERTICAL} class="Audio">
           <button
             onClicked={() => {
               speaker.set_mute(!mute())
             }}
           >
-            <box>
-              <VolumeIcon />
-              <label label={volume(clampVolume)} />
-            </box>
+            <centerbox>
+              <VolumeIcon $type="start" />
+              <label label={volume(clampVolume)} $type="end" />
+            </centerbox>
           </button>
           <slider
             min={0}

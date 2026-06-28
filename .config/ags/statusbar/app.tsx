@@ -10,12 +10,9 @@ import Keyboard from "./widget/Keyboard"
 import Network from "./widget/Network"
 import Tray from "./widget/Tray"
 import Mpris from "./widget/Mpris"
-import NotificationPopups from "./widget/Notifications"
 
 function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
-
-  const geometry = gdkmonitor.get_geometry()
 
   return (
     <window
@@ -25,10 +22,7 @@ function Bar(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
-      // anchor={TOP}
       application={app}
-      // widthRequest={geometry.width * 0.8}
-      // widthRequest={1200}
     >
       <centerbox orientation={Gtk.Orientation.HORIZONTAL}>
         <box $type="start">
