@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo $#
-
 if [ $# -eq 0 ]; then
     BAR_NAME="statusbar"
     echo "No bar name provided, using default: $BAR_NAME"
