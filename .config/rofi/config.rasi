@@ -3,18 +3,31 @@ configuration {
     combi-modes: [window, drun, run];
 }
 
-@theme "gruvbox-dark"
+// @theme "gruvbox-dark"
+@theme "Monokai"
+// @theme "fancy"
+// @theme "fullscreen-preview"
+// @theme "glue_pro_blue"
+// @theme "iggy"
 
 entry {
     placeholder: "Type here";
 }
 
 window {
-    border-radius: 10px;
+    border-radius: 13px;
+    border: 0px solid;
+    padding: 12px;
+    background-color: rgba(28, 28, 28, 0.8);
 }
 
 element {
     orientation: horizontal;
     children: [ element-icon, element-text];
-    spacing: 10px;
+    spacing: 14px;
+    padding: 4px 0;
+}
+
+element-icon {
+    size: 1.25em;
 }

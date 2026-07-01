@@ -165,20 +165,6 @@ hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "al
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
-hl.layer_rule({
-	name = "gtk4-layer-shell",
-	match = { namespace = "gtk4-layer-shell" },
-
-	blur = true,
-	blur_popups = true,
-	ignore_alpha = 0.2,
-
-	-- Try one of these:
-	-- animation = "popin 85%",
-	-- animation = "slide top",
-	animation = "slidefade top",
-})
-
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
 -- uncomment all if you wish to use that.
@@ -196,6 +182,20 @@ hl.layer_rule({
 --     border_size = 0,
 --     rounding    = 0,
 -- })
+
+hl.layer_rule({
+	name = "rofi-blur",
+	match = { namespace = "rofi" },
+	blur = true,
+	ignore_alpha = 0,
+})
+
+hl.layer_rule({
+	name = "ags-blur",
+	match = { namespace = "gtk4-layer-shell" },
+	blur = true,
+	ignore_alpha = 0,
+})
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
