@@ -11,7 +11,9 @@ export default function Battery() {
     "percentage",
   )((p) => `${Math.min(p * 100).toFixed(0)}%`)
 
-  return battery == null ? (
+  console.log(battery.isBattery)
+
+  return battery == null || !battery.isBattery ? (
     <> </>
   ) : (
     <box>

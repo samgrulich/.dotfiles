@@ -14,11 +14,34 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- laptop monitor
 hl.monitor({
 	output = "eDP-1",
 	mode = "1920x1080@60",
 	position = "auto",
 	scale = "1.00",
+})
+
+-- desktop monitors
+hl.monitor({
+	output = "HDMI-A-1",
+	mode = "2560x1440@144",
+	position = "0x0",
+})
+
+hl.monitor({
+	output = "DP-2",
+	mode = "1920x1080@60",
+	position = "2560x0",
+	transform = 3,
+})
+
+-- fallback
+hl.monitor({
+	output = "",
+	mode = "preferred",
+	position = "auto",
+	scale = "auto",
 })
 
 ---------------------
@@ -248,7 +271,7 @@ hl.config({
 
 		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
-		natural_scroll = true,
+		natural_scroll = false,
 		touchpad = {
 			natural_scroll = true,
 		},
