@@ -122,6 +122,83 @@ async function listWifiNetworks(): Promise<WifiNetwork[]> {
   })
 }
 
+type NetworkType = "ethernet" | "wifi"
+
+type ActiveConnection = {
+  name: string
+  type: NetworkType
+  device: string
+}
+
+function nmTypeToNetworkType(type: string): NetworkType | null {
+  if (type === "802-3-ethernet") return "ethernet"
+  if (type === "802-11-wireless") return "wifi"
+  return null
+}
+
+async function getActiveConnections(): Promise<ActiveConnection[]> {
+  const output = await execAsync(
+    "nmcli -t -f NAME,TYPE,DEVICE connection show --active",
+  )
+
+  return output
+    .split("\n")
+    .filter((line) => line.trim().length > 0)
+    .map(parseNmcliEscapedLine)
+    .map(([name, rawType, device]) => {
+      const type = nmTypeToNetworkType(rawType)
+
+      if (!name || !type || !device) return null
+
+      return {
+        name,
+        type,
+        device,
+      }
+    })
+    .filter((item): item is ActiveConnection => item !== null)
+}
+
+async function preferConnection(type: NetworkType) {
+  const activeConnections = await getActiveConnections()
+
+  const preferred = activeConnections.find((item) => item.type === type)
+  const fallback = activeConnections.find((item) => item.type !== type)
+
+  if (!preferred) {
+    throw new Error(
+      type === "ethernet"
+        ? "No active wired connection found"
+        : "No active Wi-Fi connection found",
+    )
+  }
+
+  if (!fallback) {
+    throw new Error("No other active connection found")
+  }
+
+  await execAsync(
+    `nmcli connection modify ${shquote(preferred.name)} connection.autoconnect-priority 100 ipv4.route-metric 50 ipv6.route-metric 50`,
+  )
+
+  await execAsync(
+    `nmcli connection modify ${shquote(fallback.name)} connection.autoconnect-priority 0 ipv4.route-metric 600 ipv6.route-metric 600`,
+  )
+
+  /*
+   * Reapply makes NetworkManager push the changed settings to the active devices.
+   * This avoids fully disconnecting either interface.
+   */
+  await execAsync(`nmcli device reapply ${shquote(preferred.device)}`)
+  await execAsync(`nmcli device reapply ${shquote(fallback.device)}`)
+
+  /*
+   * Bring the preferred connection up again so NetworkManager refreshes routing.
+   * This should not require disabling the other connection.
+   */
+  await execAsync(`nmcli connection up ${shquote(preferred.name)}`)
+}
+
 function WifiRow({
   item,
   refresh,
@@ -419,10 +496,12 @@ function Wired({ network }: NetworkProps) {
 
   return (
     <box orientation={Gtk.Orientation.VERTICAL} spacing={6}>
-      <box spacing={8}>
-        <image iconName={createBinding(wired, "icon-name")} />
-        <label label="Wired" class="title" xalign={0} />
-      </box>
+      <centerbox>
+        <box spacing={8} $type="start">
+          <image iconName={createBinding(wired, "icon-name")} />
+          <label label="Wired" class="title" xalign={0} />
+        </box>
+      </centerbox>
 
       <centerbox>
         <label $type="start" label="Speed" xalign={0} />
@@ -435,6 +514,77 @@ function Wired({ network }: NetworkProps) {
           xalign={1}
         />
       </centerbox>
+    </box>
+  )
+}
+
+function PrimarySwitcher({ network }: NetworkProps) {
+  const primary = createBinding(network, "primary")
+  const [busy, setBusy] = createState(false)
+  const [error, setError] = createState("")
+
+  async function switchPrimary(type: "ethernet" | "wifi") {
+    setBusy(true)
+    setError("")
+
+    try {
+      await preferConnection(type)
+    } catch (err) {
+      console.error(`Failed to switch primary network to ${type}`, err)
+      setError(
+        type === "ethernet"
+          ? "Could not switch to wired."
+          : "Could not switch to Wi-Fi.",
+      )
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <box orientation={Gtk.Orientation.VERTICAL} spacing={6}>
+      <label label="Primary connection" class="subtitle" xalign={0} />
+
+      <centerbox>
+        <label
+          $type="start"
+          label={primary((value) =>
+            value === 1 ? "Wired" : value === 2 ? "Wi-Fi" : "Disconnected",
+          )}
+          xalign={0}
+        />
+
+        <box $type="end" spacing={6}>
+          <button
+            sensitive={busy((value) => !value)}
+            visible={primary((value) => value !== 1)}
+            onClicked={() => switchPrimary("ethernet")}
+          >
+            <box spacing={6}>
+              <Gtk.Spinner visible={busy} spinning={busy} />
+              <label label="Prefer wired" />
+            </box>
+          </button>
+
+          <button
+            sensitive={busy((value) => !value)}
+            visible={primary((value) => value !== 2)}
+            onClicked={() => switchPrimary("wifi")}
+          >
+            <box spacing={6}>
+              <Gtk.Spinner visible={busy} spinning={busy} />
+              <label label="Prefer Wi-Fi" />
+            </box>
+          </button>
+        </box>
+      </centerbox>
+
+      <label
+        visible={error((text) => text.length > 0)}
+        label={error}
+        class="error"
+        xalign={0}
+      />
     </box>
   )
 }
@@ -468,6 +618,8 @@ export default function Network() {
           spacing={10}
           class="Network"
         >
+          <PrimarySwitcher network={network} />
+          <Gtk.Separator />
           <Wired network={network} />
           <Gtk.Separator />
           <Wifi network={network} />
