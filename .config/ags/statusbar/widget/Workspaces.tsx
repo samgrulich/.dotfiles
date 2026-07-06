@@ -16,7 +16,7 @@ export default function Workspaces() {
       <For each={sortedWorkspaces}>
         {(ws) => (
           <button
-            class={focused((fw) => (fw.id == ws.id ? "focused" : ""))}
+            class={focused((fw) => (fw?.id == ws.id ? "focused" : ""))}
             onClicked={() =>
               hyprland.dispatch(`hl.dsp.focus`, `{workspace=${ws.id}}`)
             }

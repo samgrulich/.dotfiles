@@ -27,6 +27,7 @@ hl.monitor({
 	output = "HDMI-A-1",
 	mode = "2560x1440@144",
 	position = "0x0",
+	scale = "1.00",
 })
 
 hl.monitor({
@@ -34,6 +35,7 @@ hl.monitor({
 	mode = "1920x1080@60",
 	position = "2560x0",
 	transform = 3,
+	scale = "1.00",
 })
 
 -- fallback
@@ -64,7 +66,7 @@ local menu = "rofi"
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd(terminal)
-	hl.exec_cmd("ags run ~/.config/ags/statusbar ")
+	hl.exec_cmd("$HOME/.config/ags/run_statusbar.sh")
 	hl.exec_cmd("hyprpaper & hypridle & hyprsunset")
 	-- hl.exec_cmd("nm-applet")
 	hl.exec_cmd("firefox", { workspace = "2", no_initial_focus = true }) -- Start firefox on workspace 2
