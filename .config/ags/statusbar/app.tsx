@@ -34,17 +34,18 @@ function Bar(gdkmonitor: Gdk.Monitor) {
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
       application={app}
-      namespace="statusbar"
+      namespace={`statusbar-${key}`}
     >
       <centerbox orientation={Gtk.Orientation.HORIZONTAL}>
         <box $type="start">
           <Archicon />
           <Workspaces />
         </box>
+
         <box $type="center">
           <Mpris />
-          {/* <NotificationPopups /> */}
         </box>
+
         <box $type="end">
           <Tray />
           <Network />
@@ -58,31 +59,14 @@ function Bar(gdkmonitor: Gdk.Monitor) {
   )
 }
 
-let bars: Astal.Window[] = []
-let rebuildTimer: ReturnType<typeof timeout> | null = null
+let restartTimer: ReturnType<typeof timeout> | null = null
 
-function destroyBars() {
-  for (const bar of bars) {
-    bar.destroy()
-  }
+function scheduleExitForExternalRestart() {
+  if (restartTimer) return
 
-  bars = []
-}
-
-function createBars() {
-  destroyBars()
-
-  for (const monitor of app.get_monitors()) {
-    bars.push(Bar(monitor) as Astal.Window)
-  }
-}
-
-function scheduleRecreateBars() {
-  if (rebuildTimer) return
-
-  rebuildTimer = timeout(2500, () => {
-    rebuildTimer = null
-    createBars()
+  restartTimer = timeout(3000, () => {
+    restartTimer = null
+    app.quit()
   })
 }
 
@@ -90,10 +74,12 @@ app.start({
   css: style,
   gtkTheme: "Adwaita-dark",
   main() {
-    createBars()
+    for (const monitor of app.get_monitors()) {
+      Bar(monitor)
+    }
 
     app.connect("notify::monitors", () => {
-      scheduleRecreateBars()
+      scheduleExitForExternalRestart()
     })
   },
 })
