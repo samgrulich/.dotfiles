@@ -7,6 +7,23 @@ return {
 		end,
 	},
 
+	-- animations
+	-- {
+	-- 	"echasnovski/mini.animate",
+	-- 	event = "VeryLazy",
+	-- 	opts = function(_, opts)
+	-- 		local animate = require("mini.animate")
+	-- 		opts.cursor = {
+	-- 			enable = true,
+	-- 			timing = animate.gen_timing.linear({ duration = 50, unit = "total" }),
+	-- 		}
+	-- 		opts.scroll = {
+	-- 			enable = true,
+	-- 			timing = animate.gen_timing.linear({ duration = 150, unit = "total" }),
+	-- 		}
+	-- 	end,
+	-- },
+
 	-- search/replace in multiple files
 	{
 		"MagicDuck/grug-far.nvim",
@@ -54,6 +71,7 @@ return {
 	-- with the active keybindings of the command you started typing.
 	{
 		"folke/which-key.nvim",
+		dependencies = { "nvim-mini/mini.icons" },
 		event = "VeryLazy",
 		opts_extend = { "spec" },
 		opts = {
@@ -62,13 +80,16 @@ return {
 			spec = {
 				{
 					mode = { "n", "v" },
-					{ "<leader>e", group = "Ex" },
+					{ "<leader>e", group = "files", icon = { icon = " ", color = "green" } },
 					{ "<leader>c", group = "code" },
 					{ "<leader>d", group = "debug" },
-					{ "<leader>f", group = "find/fullscreen" },
+					{ "<leader>f", group = "fullscreen", icon = { icon = "󰊓 " } },
 					{ "<leader>s", group = "search" },
+					{ "<leader>m", group = "move" },
+					{ "<leader>h", group = "harpoon", icon = { icon = "󱡅 ", color = "blue" } },
 					{ "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
 					{ "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+					{ "<leader>TAB", group = "tabs", icon = { icon = "󰓩 ", color = "blue" } },
 					{ "[", group = "prev" },
 					{ "]", group = "next" },
 					{ "g", group = "goto" },
@@ -77,6 +98,7 @@ return {
 					{
 						"<leader>b",
 						group = "buffer",
+						icon = { icon = " ", color = "blue" },
 						expand = function()
 							return require("which-key.extras").expand.buf()
 						end,
@@ -166,6 +188,7 @@ return {
 	-- in your project and loads them into a browsable list.
 	{
 		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		cmd = { "TodoTrouble", "TodoTelescope" },
 		event = "VeryLazy",
 		opts = {},
@@ -178,5 +201,143 @@ return {
       { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
       { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     },
+	},
+
+	-- auto pairs
+	{
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
+		opts = {
+			modes = { insert = true, command = true, terminal = false },
+			-- skip autopair when next character is one of these
+			skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+			-- skip autopair when the cursor is inside these treesitter nodes
+			skip_ts = { "string" },
+			-- skip autopair when next character is closing pair
+			-- and there are more closing pairs than opening pairs
+			skip_unbalanced = true,
+			-- better deal with markdown code blocks
+			markdown = true,
+		},
+	},
+
+	-- comments
+	{
+		"folke/ts-comments.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
+
+	-- Better text-objects
+	{
+		"echasnovski/mini.ai",
+		event = "VeryLazy",
+		opts = function() end,
+	},
+
+	-- Indented lines
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {
+			indent = { char = { "│", "╎" }, tab_char = { "│", "╎" } },
+		},
+	},
+
+	-- Treesitter for managing of language parsers
+	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		build = ":TSUpdate",
+		lazy = false,
+		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+		init = function()
+			local require_list = {
+				"bash",
+				"c",
+				"cpp",
+				"css",
+				"diff",
+				"html",
+				"jsx",
+				"javascript",
+				"jsdoc",
+				"json",
+				"lua",
+				"luadoc",
+				"luap",
+				"markdown",
+				"markdown_inline",
+				"printf",
+				"python",
+				"query",
+				"regex",
+				"scss",
+				"svelte",
+				"toml",
+				"tsx",
+				"typescript",
+				"vim",
+				"vimdoc",
+				"xml",
+				"yaml",
+			}
+			local ts = require("nvim-treesitter")
+			pcall(ts.install, require_list)
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = require_list,
+				callback = function()
+					-- syntax highlighting, provided by Neovim
+					vim.treesitter.start()
+					-- folds, provided by Neovim
+					vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+					vim.wo.foldmethod = "expr"
+					-- indentation, provided by nvim-treesitter
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
+			})
+		end,
+	},
+
+	-- Automatically add closing tags for HTML and JSX
+	{
+		"windwp/nvim-ts-autotag",
+		ft = { "javascript", "typescript", "svelte", "html", "tsx", "tsx", "markdown", "php" },
+		opts = {},
+	},
+
+	-- telescope
+	{
+		"nvim-telescope/telescope.nvim",
+		version = "*",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			-- optional, but recommended
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		},
+		config = function()
+			require("telescope").setup({
+				pickers = {
+					find_files = {
+						theme = "ivy",
+					},
+					git_files = {
+						theme = "ivy",
+					},
+				},
+				extensions = {
+					fzf = {},
+				},
+			})
+
+			require("telescope").load_extension("fzf")
+
+			vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "Find help" })
+			vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "Find files" })
+			vim.keymap.set("n", "<leader>sg", require("telescope.builtin").git_files, { desc = "Find git files" })
+		end,
 	},
 }

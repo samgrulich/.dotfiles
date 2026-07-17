@@ -1,20 +1,9 @@
 local map = vim.keymap.set
 
--- split manipulation
-map("n", "<leader>n", "<C-w>v<CR>", { desc = "Split Vertically" })
-map("n", "<leader>v", "<C-w>n<CR>", { desc = "Split Horizontally " })
-map("n", "<leader>en", "<C-w>v<cmd>Ex<CR>", { desc = "Split Vertically & Open FileEx" })
-map("n", "<leader>ev", "<C-w>n<cmd>Ex<CR>", { desc = "Split Horizontally & Open FileEx" })
-
-map("n", "<leader>h", "<C-w>h", { desc = "Go Left" })
-map("n", "<leader>j", "<C-w>j", { desc = "Go Down" })
-map("n", "<leader>k", "<C-w>k", { desc = "Go Up" })
-map("n", "<leader>l", "<C-w>l", { desc = "Go Right" })
-
-map("n", "<leader>H", "<C-w>H<CR>", { desc = "Move win Left" })
-map("n", "<leader>J", "<C-w>J<CR>", { desc = "Move win Down" })
-map("n", "<leader>K", "<C-w>K<CR>", { desc = "Move win Up" })
-map("n", "<leader>L", "<C-w>L<CR>", { desc = "Move win Right" })
+-- map("n", "<leader>h", "<C-w>h", { desc = "Go Left" })
+-- map("n", "<leader>j", "<C-w>j", { desc = "Go Down" })
+-- map("n", "<leader>k", "<C-w>k", { desc = "Go Up" })
+-- map("n", "<leader>l", "<C-w>l", { desc = "Go Right" })
 
 -- Terminal Mappings
 map("t", "<ESC>", "<C-\\><C-n>", { desc = "Terminal exit" })
@@ -24,15 +13,10 @@ map("t", "<leader>k", "<C-\\><C-n><C-w>k", { desc = "Go Up" })
 map("t", "<leader>l", "<C-\\><C-n><C-w>l", { desc = "Go Right" })
 
 --resize
-map("n", "<C-Up>", "10<C-w>-<CR>", { desc = "Win size vertical--" })
-map("n", "<C-Left>", "10<C-w><<CR>", { desc = "Win size horizontal--" })
-map("n", "<C-Right>", "10<C-w>><CR>", { desc = "Win size horizontal++" })
-map("n", "<C-Down>", "10<C-w>+<CR>", { desc = "Win size vertical++" })
-
-map("n", "<leader>fc", "<C-w>|<C-w>_<CR>", { desc = "Fullscreen current tab" })
-map("n", "<leader>fn", "<C-w>|<CR>", { desc = "Fullscreen current tab horizontally" })
-map("n", "<leader>fv", "<C-w>_<CR>", { desc = "Fullscreen current tab vertically" })
-map("n", "<leader>=", "<C-w>=<CR>", { desc = "Equalize all tabs" })
+map("n", "<leader>fc", "<C-w>|<C-w>_<CR>", { desc = "Fullscreen current window" })
+map("n", "<leader>fn", "<C-w>|<CR>", { desc = "Fullscreen current window horizontally" })
+map("n", "<leader>fv", "<C-w>_<CR>", { desc = "Fullscreen current window vertically" })
+-- map("n", "<leader>w=", "<C-w>=<CR>", { desc = "Equalize all windows" })
 
 -- files
 map("n", "<leader>ef", "<cmd>Ex<CR>", { desc = "Open FileEx" })
@@ -42,18 +26,17 @@ map("n", "<C-d>", "<C-d>zz", { desc = "Move half page down (and center) " })
 map("n", "<C-u>", "<C-u>zz", { desc = "Move half page up   (and center) " })
 
 -- disable copilot
-map("n", "<leader>0", "<cmd>Copilot disable<CR>", { desc = "Disable copilot" })
+map("n", "<leader>c0", "<cmd>Copilot disable<CR>", { desc = "Disable copilot" })
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+map("n", "<leader>mj", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+map("n", "<leader>mk", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+map("i", "<leader>mj", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<leader>mk", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "<leader>mj", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<leader>mk", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- lsp
--- TODO:
 map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
 map("n", "gr", vim.lsp.buf.references, { desc = "References" })
 map("n", "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
@@ -63,25 +46,26 @@ map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" 
 map({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, { desc = "Run Codelens" })
 map("n", "<leader>cC", vim.lsp.codelens.refresh, { desc = "Refresh & Display Codelens" })
 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
--- map("n", "K", function()
--- 	return vim.lsp.buf.hover()
--- end, { desc = "Hover" })
--- map("n", "gK", function()
--- 	return vim.lsp.buf.signature_help()
--- end, { desc = "Signature Help" })
+
+map("n", "K", function()
+	return vim.lsp.buf.hover()
+end, { desc = "Hover" })
+map("n", "gK", function()
+	return vim.lsp.buf.signature_help()
+end, { desc = "Signature Help" })
 -- map("n", "<c-k>", function()
 -- 	return vim.lsp.buf.signature_help()
 -- end, { mode = "i", desc = "Signature Help" })
 
--- -- buffers
--- map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
--- map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
--- map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
--- map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
--- map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
--- map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
--- map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
---
+-- buffers
+map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+
 -- -- Clear search, diff update and redraw
 -- -- taken from runtime/lua/_editor.lua
 -- map(
@@ -109,28 +93,28 @@ map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 --
 -- --keywordprg
 -- map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
---
--- -- better indenting
--- map("v", "<", "<gv")
--- map("v", ">", ">gv")
---
--- -- commenting
--- map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
--- map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
---
--- -- lazy
--- map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
---
--- -- new file
--- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
---
--- -- location list
--- map("n", "<leader>xl", function()
---   local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
---   if not success and err then
---     vim.notify(err, vim.log.levels.ERROR)
---   end
--- end, { desc = "Location List" })
+
+-- better indenting
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
+-- commenting
+map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+
+-- lazy
+map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+
+-- new file
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+-- location list
+map("n", "<leader>xl", function()
+	local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+	if not success and err then
+		vim.notify(err, vim.log.levels.ERROR)
+	end
+end, { desc = "Location List" })
 
 -- quickfix list
 map("n", "<leader>xq", function()
@@ -148,86 +132,76 @@ map({ "n", "v" }, "<leader>cf", function()
 	require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "Format" })
 
--- -- diagnostic
--- local diagnostic_goto = function(next, severity)
---   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
---   severity = severity and vim.diagnostic.severity[severity] or nil
---   return function()
---     go({ severity = severity })
---   end
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function()
+		go({ severity = severity })
+	end
+end
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+-- stylua: ignore start
+
+-- toggle options
+-- Utils.format.snacks_toggle():map("<leader>uf")
+-- Utils.format.snacks_toggle(true):map("<leader>uF")
+-- Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+-- Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+-- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+-- Snacks.toggle.diagnostics():map("<leader>ud")
+-- Snacks.toggle.line_number():map("<leader>ul")
+-- Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
+-- Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
+-- Snacks.toggle.treesitter():map("<leader>uT")
+-- Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background" }):map("<leader>ub")
+-- Snacks.toggle.dim():map("<leader>uD")
+-- Snacks.toggle.animate():map("<leader>ua")
+-- Snacks.toggle.indent():map("<leader>ug")
+-- Snacks.toggle.scroll():map("<leader>uS")
+-- Snacks.toggle.profiler():map("<leader>dpp")
+-- Snacks.toggle.profiler_highlights():map("<leader>dph")
+
+-- if vim.lsp.inlay_hint then
+--   Snacks.toggle.inlay_hints():map("<leader>uh")
 -- end
--- map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
--- map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
--- map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
--- map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
--- map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
--- map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
--- map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
---
--- -- stylua: ignore start
---
--- -- toggle options
--- -- Utils.format.snacks_toggle():map("<leader>uf")
--- -- Utils.format.snacks_toggle(true):map("<leader>uF")
--- -- Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
--- -- Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
--- -- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
--- -- Snacks.toggle.diagnostics():map("<leader>ud")
--- -- Snacks.toggle.line_number():map("<leader>ul")
--- -- Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
--- -- Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
--- -- Snacks.toggle.treesitter():map("<leader>uT")
--- -- Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background" }):map("<leader>ub")
--- -- Snacks.toggle.dim():map("<leader>uD")
--- -- Snacks.toggle.animate():map("<leader>ua")
--- -- Snacks.toggle.indent():map("<leader>ug")
--- -- Snacks.toggle.scroll():map("<leader>uS")
--- -- Snacks.toggle.profiler():map("<leader>dpp")
--- -- Snacks.toggle.profiler_highlights():map("<leader>dph")
---
--- -- if vim.lsp.inlay_hint then
--- --   Snacks.toggle.inlay_hints():map("<leader>uh")
--- -- end
---
--- -- quit
--- map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
---
--- -- highlights under cursor
--- map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
--- map("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_input("I") end, { desc = "Inspect Tree" })
---
--- -- floating terminal
--- -- map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
--- -- map("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "Terminal (Root Dir)" })
--- -- map("n", "<c-/>",      function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "Terminal (Root Dir)" })
--- -- map("n", "<c-_>",      function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "which_key_ignore" })
+
+-- quit
+map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
+-- highlights under cursor
+map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+map("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_input("I") end, { desc = "Inspect Tree" })
+
+-- floating terminal
+-- map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+-- map("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "Terminal (Root Dir)" })
+-- map("n", "<c-/>",      function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "Terminal (Root Dir)" })
+-- map("n", "<c-_>",      function() Snacks.terminal(nil, { cwd = Utils.root() }) end, { desc = "which_key_ignore" })
 
 -- Terminal Mappings
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
--- -- windows
+-- windows
 -- map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 -- map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
--- map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
--- -- Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
--- -- Snacks.toggle.zen():map("<leader>uz")
---
--- -- tabs
--- map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
--- map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
--- map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
--- map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
--- map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
--- map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
--- map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
---
--- -- native snippets. only needed on < 0.11, as 0.11 creates these by default
--- if vim.fn.has("nvim-0.11") == 0 then
---   map("s", "<Tab>", function()
---     return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
---   end, { expr = true, desc = "Jump Next" })
---   map({ "i", "s" }, "<S-Tab>", function()
---     return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
---   end, { expr = true, desc = "Jump Previous" })
--- end
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+-- Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
+-- Snacks.toggle.zen():map("<leader>uz")
+
+-- tabs
+map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
