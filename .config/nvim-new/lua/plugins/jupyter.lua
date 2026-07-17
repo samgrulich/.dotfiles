@@ -1,38 +1,115 @@
-return {
-	{
-		"GCBallesteros/jupytext.nvim",
-		config = true,
-		-- Depending on your nvim distro or config you may need to make the loading not lazy
-		-- lazy=false,
-		opts = {
-			style = "hydrogen",
-			output_extension = "auto",
-			force_ft = nil,
-		},
-	},
-	{
-		"3rd/image.nvim",
-		version = "^1.1.0",
-		opts = {
-			backend = "kitty", -- or "ueberzug" or "sixel"
-			processor = "magick_cli", -- or "magick_rock"
-			integrations = {},
-			max_width = 100,
-			max_height = 12,
-			max_width_window_percentage = math.huge,
-			max_height_window_percentage = math.huge,
-			scale_factor = 1.0,
-			window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
-			window_overlap_clear_ft_ignore = {
-				"cmp_menu",
-				"cmp_docs",
-				"snacks_notif",
-				"scrollview",
-				"scrollview_sign",
-			},
-			editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
-			tmux_show_only_in_active_window = false, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
-			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
-		},
-	},
-}
+-- return {
+-- 	-- conversion from jupyter notebooks to markdown and back, and other formats
+-- 	{
+-- 		"GCBallesteros/jupytext.nvim",
+-- 		config = true,
+-- 		-- Depending on your nvim distro or config you may need to make the loading not lazy
+-- 		-- lazy=false,
+-- 		opts = {
+-- 			style = "hydrogen",
+-- 			output_extension = "auto",
+-- 			force_ft = nil,
+-- 			-- custom_language_formatting = {
+-- 			-- 	python = {
+-- 			-- 		extension = "qmd",
+-- 			-- 		style = "quarto",
+-- 			-- 		force_ft = "quarto", -- you can set whatever filetype you want here
+-- 			-- 		-- force_ft = "python", -- you can set whatever filetype you want here
+-- 			-- 	},
+-- 			-- },
+-- 		},
+-- 	},
+--
+-- 	-- Quarto (i think it is for formatting and support of syntax highlighting) support for nvim, including jupyter notebooks
+-- 	-- {
+-- 	-- 	"quarto-dev/quarto-nvim",
+-- 	-- 	dependencies = {
+-- 	-- 		"jmbuhr/otter.nvim",
+-- 	-- 		"nvim-treesitter/nvim-treesitter",
+-- 	-- 	},
+-- 	-- },
+--
+-- 	-- Runtime for executing code in nvim, including jupyter notebooks
+-- 	{
+-- 		"benlubas/molten-nvim",
+-- 		version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+-- 		dependencies = { "3rd/image.nvim" },
+-- 		build = ":UpdateRemotePlugins",
+-- 		init = function()
+-- 			-- these are examples, not defaults. Please see the readme
+-- 			vim.g.molten_image_provider = "image.nvim"
+-- 			vim.g.python3_host_prog = vim.fn.expand("~/.conda/envs/nvim_jupyter/bin/python")
+-- 			vim.g.molten_output_win_max_height = 20
+--
+-- 			-- optional, I like wrapping. works for virt text and the output window
+-- 			vim.g.molten_wrap_output = true
+--
+-- 			-- Output as virtual text. Allows outputs to always be shown, works with images, but can
+-- 			-- be buggy with longer images
+-- 			vim.g.molten_virt_text_output = true
+--
+-- 			-- this will make it so the output shows up below the \`\`\` cell delimiter
+-- 			vim.g.molten_virt_lines_off_by_1 = true
+-- 		end,
+-- 		keys = {
+-- 			-- core keymaps
+-- 			{ "<localleader>e", "<cmd>MoltenEvaluateOperator<cr>", desc = "Molten evaluate operator" },
+-- 			{ "<localleader>os", "<cmd>noautocmd MoltenEnterOutput<cr>", desc = "Molten open output window" },
+-- 			-- also recommended to add these to your keymaps for convenience
+-- 			{ "<localleader>rr", "<cmd>MoltenReevaluateCell<CR>", desc = "re-eval cell" },
+-- 			{ "<localleader>r", "<cmd><C-u>MoltenEvaluateVisual<CR>gv", desc = "execute visual selection", mode = "v" },
+-- 			{ "<localleader>oh", "<cmd>MoltenHideOutput<CR>", desc = "close output window" },
+-- 			{ "<localleader>md", "<cmd>MoltenDelete<CR>", desc = "delete Molten cell" },
+-- 			-- if you work with html outputs:
+-- 			{ "<localleader>mx", "<cmd>MoltenOpenInBrowser<CR>", desc = "open output in browser" },
+-- 		},
+-- 	},
+-- 	-- Display images in nvim, used by molten-nvim for image outputs
+-- 	{
+-- 		"3rd/image.nvim",
+-- 		version = "^1.1.0",
+-- 		opts = {
+-- 			backend = "kitty", -- or "ueberzug" or "sixel"
+-- 			processor = "magick_cli", -- or "magick_rock"
+-- 			integrations = {},
+-- 			max_width = 100,
+-- 			max_height = 12,
+-- 			max_width_window_percentage = math.huge,
+-- 			max_height_window_percentage = math.huge,
+-- 			scale_factor = 1.0,
+-- 			window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+-- 			window_overlap_clear_ft_ignore = {
+-- 				"cmp_menu",
+-- 				"cmp_docs",
+-- 				"snacks_notif",
+-- 				"scrollview",
+-- 				"scrollview_sign",
+-- 			},
+-- 			editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
+-- 			tmux_show_only_in_active_window = false, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+-- 			-- hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
+-- 		},
+-- 	},
+-- }
+--
+-- -- TODO: add these
+-- -- vim.g.python3_host_prog=vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
+-- -- and automatic launch of the kernell
+-- -- vim.keymap.set("n", "<localleader>ip", function()
+-- --   local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+-- --   if venv ~= nil then
+-- --     -- in the form of /home/benlubas/.virtualenvs/VENV_NAME
+-- --     venv = string.match(venv, "/.+/(.+)")
+-- --     vim.cmd(("MoltenInit %s"):format(venv))
+-- --   else
+-- --     vim.cmd("MoltenInit python3")
+-- --   end
+-- -- end, { desc = "Initialize Molten for python3", silent = true })
+-- --
+-- -- TODO: another possibility of latex support
+-- --  { -- preview equations
+-- --   'jbyuki/nabla.nvim',
+-- --   keys = {
+-- --     { '<leader>qm', ':lua require"nabla".toggle_virt()<cr>', desc = 'toggle [m]ath equations' },
+-- --   },
+-- -- },
