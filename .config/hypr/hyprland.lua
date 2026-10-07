@@ -67,7 +67,7 @@ local menu = "rofi"
 hl.on("hyprland.start", function()
 	hl.exec_cmd(terminal)
 	hl.exec_cmd("$HOME/.config/ags/run_statusbar.sh")
-	hl.exec_cmd("hyprpaper & hypridle & hyprsunset")
+	hl.exec_cmd("hyprpaper & hypridle & sunsetr")
 	-- hl.exec_cmd("nm-applet")
 	hl.exec_cmd("firefox", { workspace = "2", no_initial_focus = true }) -- Start firefox on workspace 2
 end)
@@ -444,3 +444,6 @@ hl.window_rule({
 	match = { class = "Spotify" },
 	workspace = 4,
 })
+
+-- confine cursor in game windows
+hl.window_rule({ match = { content = "game", fullscreen = true }, confine_pointer = true })
